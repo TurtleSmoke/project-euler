@@ -10,8 +10,8 @@ title = "Project Euler"
 create-missing = false
 
 [output.html]
-git-repository-url = "https://github.com/TurtleSmoke/Project-Euler"
-site-url = "https://turtlesmoke.github.io/Project-Euler"
+git-repository-url = "https://github.com/TurtleSmoke/project-euler"
+site-url = "https://turtlesmoke.dev/project-euler"
 mathjax-support = true
 default-theme = "navy"
 preferred-dark-theme = "navy"

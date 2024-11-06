@@ -9,7 +9,11 @@ def totient_list(n):
 
 def totient_permutation(limit=10000001):
     totatives = totient_list(limit)
-    totatives = ((n, t) for n, t in enumerate(totatives) if sorted(str(n)) == sorted(str(t)) and n > 1)
+    totatives = (
+        (n, t)
+        for n, t in enumerate(totatives)
+        if sorted(str(n)) == sorted(str(t)) and n > 1
+    )
     return min(totatives, key=lambda x: x[0] / x[1])[0]
 
 

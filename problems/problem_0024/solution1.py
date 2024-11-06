@@ -8,4 +8,10 @@ def lexicographic_permutations(s):
 
 
 if __name__ == "__main__":
-    print(next(res for i, res in enumerate(lexicographic_permutations("0123456789")) if i == 999999))
+    print(
+        next(
+            res
+            for i, res in enumerate(lexicographic_permutations("0123456789"))
+            if i == 999999
+        )
+    )

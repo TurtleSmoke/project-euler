@@ -7,7 +7,9 @@ def find_cycle(first_two_digits, polygonals, cycle):
     for i in range(len(polygonals)):
         for p in polygonals[i]:
             if p // 100 == first_two_digits:
-                new_cycle = find_cycle(p % 100, polygonals[:i] + polygonals[i + 1 :], cycle + [p])
+                new_cycle = find_cycle(
+                    p % 100, polygonals[:i] + polygonals[i + 1 :], cycle + [p]
+                )
                 if new_cycle:
                     return new_cycle
 

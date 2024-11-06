@@ -79,9 +79,13 @@ class Suit(Enum):
 
 def get_hand(hand):
     values = sorted([Card.from_string(card[0]) for card in hand])
-    occ, values = zip(*sorted(((v, k) for k, v in Counter(values).items()), reverse=True))
+    occ, values = zip(
+        *sorted(((v, k) for k, v in Counter(values).items()), reverse=True)
+    )
 
-    is_straight = all(values[i].value == values[i + 1].value + 1 for i in range(len(values) - 1))
+    is_straight = all(
+        values[i].value == values[i + 1].value + 1 for i in range(len(values) - 1)
+    )
     is_flush = len(set(card[1] for card in hand)) == 1
 
     if occ == (4, 1):

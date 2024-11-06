@@ -12,7 +12,9 @@ def get_problem_sources(problem_id):
         module = ast.parse(path.read_text())
         for node in module.body:
             if isinstance(node, ast.FunctionDef):
-                problem_sources[path.stem][node.name] = ast.get_source_segment(path.read_text(), node)
+                problem_sources[path.stem][node.name] = ast.get_source_segment(
+                    path.read_text(), node
+                )
     return problem_sources
 
 

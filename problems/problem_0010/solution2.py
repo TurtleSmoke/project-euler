@@ -16,7 +16,12 @@ def tk(n, k, primes):
 def summation_of_primes(limit=2000):
     primes = list(sieve.primerange(floor(sqrt(limit)) + 1))
 
-    return phi(limit) - sum(tk(limit, i + 1, primes) for i in range(len(primes))) + sum(primes) - 1
+    return (
+        phi(limit)
+        - sum(tk(limit, i + 1, primes) for i in range(len(primes)))
+        + sum(primes)
+        - 1
+    )
 
 
 if __name__ == "__main__":

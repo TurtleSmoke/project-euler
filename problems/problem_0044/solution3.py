@@ -8,7 +8,9 @@ def is_pentagonal(n):
 
 
 def get_divisors(n):
-    return filter(lambda x: x < n and x % 3 == n % 3, divisors(n * (3 * n - 1)))  # Equation 1 and 2
+    return filter(
+        lambda x: x < n and x % 3 == n % 3, divisors(n * (3 * n - 1))
+    )  # Equation 1 and 2
 
 
 def pentagon_numbers():

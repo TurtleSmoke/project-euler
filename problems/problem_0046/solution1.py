@@ -4,7 +4,9 @@ from sympy import isprime
 
 
 def is_odd_goldbach(n):
-    return any(isprime(i) and (((n - i) / 2) ** 0.5).is_integer() for i in range(1, n + 1))
+    return any(
+        isprime(i) and (((n - i) / 2) ** 0.5).is_integer() for i in range(1, n + 1)
+    )
 
 
 def goldbachs_other_conjecture():

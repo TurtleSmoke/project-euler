@@ -5,7 +5,9 @@ from pathlib import Path
 
 def remove_example(problem_id):
     """Remove code block and add template for future generation"""
-    for path in Path("mdbook_src/problems").glob(f"problem_{problem_id:04d}/solution[0-9]*.md"):
+    for path in Path("mdbook_src/problems").glob(
+        f"problem_{problem_id:04d}/solution[0-9]*.md"
+    ):
         with open(path, "r") as f:
             lines = f.readlines()
         keep = []

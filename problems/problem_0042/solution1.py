@@ -7,7 +7,9 @@ def is_triangle_number(x):
 
 def coded_triangle_numbers():
     words = read_file("words.txt")
-    return sum(is_triangle_number(sum(ord(c) - ord("A") + 1 for c in word)) for word in words)
+    return sum(
+        is_triangle_number(sum(ord(c) - ord("A") + 1 for c in word)) for word in words
+    )
 
 
 if __name__ == "__main__":

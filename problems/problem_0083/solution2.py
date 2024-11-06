@@ -4,7 +4,9 @@ from read_file import read_file
 
 
 def dijkstra(matrix, source, target):
-    updated = [[float("inf") for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
+    updated = [
+        [float("inf") for _ in range(len(matrix[0]))] for _ in range(len(matrix))
+    ]
     updated[0][0] = matrix[0][0]
     queue = [(updated[0][0], source)]
 

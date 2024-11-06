@@ -3,9 +3,15 @@ from math import gcd
 
 def is_curious_fraction(numerator, denominator):
     if numerator % 10 == denominator // 10:
-        return abs((numerator / denominator) - (numerator // 10 / (denominator % 10))) < 0.0000001
+        return (
+            abs((numerator / denominator) - (numerator // 10 / (denominator % 10)))
+            < 0.0000001
+        )
     elif numerator // 10 == denominator % 10:
-        return abs((numerator / denominator) - (numerator % 10 / (denominator // 10))) < 0.0000001
+        return (
+            abs((numerator / denominator) - (numerator % 10 / (denominator // 10)))
+            < 0.0000001
+        )
     return False
 
 

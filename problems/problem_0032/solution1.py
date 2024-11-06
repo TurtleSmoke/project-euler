@@ -1,5 +1,7 @@
 def is_pandigital(multiplicand, multiplier, product):
-    return sorted(str(multiplicand) + str(multiplier) + str(product)) == list("123456789")
+    return sorted(str(multiplicand) + str(multiplier) + str(product)) == list(
+        "123456789"
+    )
 
 
 def is_pandigital2(multiplicand, multiplier, product):

@@ -32,7 +32,9 @@ PROBLEM_URL = lambda n: f"{BASE_URL}/problem={n}"
 
 def render_number(line):
     # Replace .../... with \frac{...}{...}
-    line = re.sub(r"(\d+|[a-z])/(\d+|[a-z])", r"\\\\( \\\\frac{\g<1>}{\g<2>} \\\\)", line)
+    line = re.sub(
+        r"(\d+|[a-z])/(\d+|[a-z])", r"\\\\( \\\\frac{\g<1>}{\g<2>} \\\\)", line
+    )
     # Replace number or operator with \\( ... \\) if there is no "{" before (created by \frac{...}{...})
     line = re.sub(r"([^{])(\d+|[+−\-*^=/<>×!]|[.]{3})", r"\g<1>\\\\( \g<2> \\\\)", line)
     # Replace → with \\( \\rightarrow \\)
@@ -91,7 +93,9 @@ def render_problem_content(content_html):
         if isinstance(s, NavigableString):
             if s.strip():
                 if s.strip().startswith("$$") and s.strip().endswith("$$"):
-                    rendered_content.append("\\\\[\n" + replace_tags(str(s.strip()), True) + "\n\\\\]")
+                    rendered_content.append(
+                        "\\\\[\n" + replace_tags(str(s.strip()), True) + "\n\\\\]"
+                    )
             continue
         line = get_raw(s)
         if s.find("img"):
@@ -101,8 +105,14 @@ def render_problem_content(content_html):
         elif s.name == "blockquote":
             line = "".join([("\n" if tag.name == "br" else "") + tag.text for tag in s])
             line = (r"\\\\" + "\n").join([l for l in line.split("\n") if l])
-            line = "\\\\[\n\\begin{align}\n" + replace_tags(line, True) + "\\end{align}\n\\\\]"
-        elif s.has_attr("class") and ("center" in s["class"] or "margin_left" in s["class"]):
+            line = (
+                "\\\\[\n\\begin{align}\n"
+                + replace_tags(line, True)
+                + "\\end{align}\n\\\\]"
+            )
+        elif s.has_attr("class") and (
+            "center" in s["class"] or "margin_left" in s["class"]
+        ):
             if s.find({"span": "class=red"}):
                 reds = s.find_all({"span": "class=red"})
                 for red in reds:
@@ -120,8 +130,14 @@ def render_problem_content(content_html):
                         new_line.append((f"**{random_tag.text}**", False))
                     elif random_tag.name == "a":
                         # If link is absolute, use it, else append BASE_URL
-                        base = "" if random_tag["href"].startswith("https://") else f"{BASE_URL}/"
-                        new_line.append((f"[{random_tag.text}]({base}{random_tag['href']})", False))
+                        base = (
+                            ""
+                            if random_tag["href"].startswith("https://")
+                            else f"{BASE_URL}/"
+                        )
+                        new_line.append(
+                            (f"[{random_tag.text}]({base}{random_tag['href']})", False)
+                        )
                     elif random_tag.name == "dfn":
                         new_line.append((f"*{random_tag.text}*", False))
                     elif random_tag.name == "var":
@@ -140,7 +156,10 @@ def render_problem_content(content_html):
                         merged_rendered[-1] = (merged_rendered[-1][0] + text, True)
                     else:
                         merged_rendered.append((text, render))
-                merged_rendered = [render_number(text) if render else text for text, render in merged_rendered]
+                merged_rendered = [
+                    render_number(text) if render else text
+                    for text, render in merged_rendered
+                ]
                 line = "".join(merged_rendered)
             else:
                 line = replace_tags(render_number(line))
@@ -157,11 +176,15 @@ class Problem:
 
     def __init__(self, qid):
         self.id = qid
-        self.title = requests.get(PROBLEMS_URL, timeout=5).text.split("\n")[qid].split("##")[1]
+        self.title = (
+            requests.get(PROBLEMS_URL, timeout=5).text.split("\n")[qid].split("##")[1]
+        )
         self.content = requests.get(MINIMAL_URL(qid), timeout=5).text
         self.rendered_content = render_problem_content(self.content)
         self.pe_problem_url = PROBLEM_URL(qid)
-        self.function_name = self.title.lower().replace(" ", "_").replace("-", "_").replace("'", "")
+        self.function_name = (
+            self.title.lower().replace(" ", "_").replace("-", "_").replace("'", "")
+        )
 
         # Path for markdown files
         self.summary_md = SUMMARY_MD

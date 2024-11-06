@@ -11,7 +11,9 @@ def cubic_permutations():
 
         for p in itertools.permutations(str(cube)):  # Condition 2
             new_cube = int("".join(p))
-            if p[0] != "0" and is_cube(new_cube) and new_cube not in cubes:  # Condition 3
+            if (
+                p[0] != "0" and is_cube(new_cube) and new_cube not in cubes
+            ):  # Condition 3
                 cubes.add(new_cube)
         if len(cubes) >= 5:  # Condition 4
             return min(cubes)
